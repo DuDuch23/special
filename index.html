@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Bonne Fête ✨</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ciel animé -->
+  <div class="sky" id="sky">
+    <div class="stars" id="stars"></div>
+  </div>
+
+  <!-- Soleil : les tournesols tournent toujours vers lui, comme toi -->
+  <div class="sun-wrap" title="Comme les tournesols, tout tourne vers toi ☀️">
+    <div class="sun-rays"></div>
+    <div class="sun">
+      <div class="sun-face">
+        <div class="sun-glasses"></div>
+        <div class="sun-smile"></div>
+      </div>
+    </div>
+    <div class="sun-badge">
+      <span class="sun-badge-icon">🌻</span>
+      <span class="sun-badge-text">Aude</span>
+    </div>
+  </div>
+
+  <!-- Nuages -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <!-- Coeurs flottants -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Spider-Man qui se balance -->
+  <div class="spidey-layer" id="spideyLayer">
+    <svg class="web-line" id="webLine" viewBox="0 0 10 500" preserveAspectRatio="none">
+      <line x1="5" y1="0" x2="5" y2="500" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+    </svg>
+    <div class="spidey" id="spidey">
+      <svg viewBox="0 0 100 140" width="70" height="98">
+        <ellipse cx="50" cy="60" rx="26" ry="34" fill="#c40b0b"/>
+        <path d="M50 26 C30 40 30 80 50 94 C70 80 70 40 50 26 Z" fill="#0d1fbf"/>
+        <g stroke="#0a0a3a" stroke-width="1.2" fill="none" opacity="0.55">
+          <path d="M50 26 L50 94"/>
+          <path d="M34 34 Q50 60 34 88"/>
+          <path d="M66 34 Q50 60 66 88"/>
+          <path d="M28 60 L72 60"/>
+        </g>
+        <path d="M30 44 Q50 34 70 44 Q50 30 30 44Z" fill="#c40b0b"/>
+        <ellipse cx="40" cy="52" rx="9" ry="6" fill="#fff" transform="rotate(-12 40 52)"/>
+        <ellipse cx="61" cy="52" rx="9" ry="6" fill="#fff" transform="rotate(12 61 52)"/>
+        <circle cx="50" cy="98" r="7" fill="#c40b0b"/>
+        <path d="M50 100 C40 112 30 108 22 118" stroke="#c40b0b" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M50 100 C60 112 70 108 78 118" stroke="#0d1fbf" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M40 128 L36 140" stroke="#c40b0b" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M60 128 L64 140" stroke="#0d1fbf" stroke-width="7" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Titre -->
+  <main class="content">
+    <h1 class="title">
+      <span class="line1">Bonne fête</span>
+      <span class="line2">des petites amies comme tu le souhaitais (étrange, n'est-ce pas ?) <span class="pulse">💖</span></span>
+    </h1>
+    <p class="subtitle">un petit site rien que pour toi, vu que je ne peux pas être présent, plein de tournesols tournés vers leur soleil, de câlins... et un cadeau sucré 🍓</p>
+
+    <button class="surprise-btn" id="surpriseBtn">✨ Clique pour ta surprise ✨</button>
+  </main>
+
+  <!-- Peluche câline -->
+  <div class="plush" id="plush" title="fais-moi un câlin, glisse-moi où tu veux !">
+    <svg viewBox="0 0 200 200" width="140" height="140">
+      <ellipse cx="60" cy="70" rx="20" ry="20" fill="#a9703f"/>
+      <ellipse cx="140" cy="70" rx="20" ry="20" fill="#a9703f"/>
+      <ellipse cx="60" cy="70" rx="10" ry="10" fill="#7a4e28"/>
+      <ellipse cx="140" cy="70" rx="10" ry="10" fill="#7a4e28"/>
+      <ellipse cx="100" cy="120" rx="70" ry="60" fill="#c98a4b"/>
+      <ellipse cx="100" cy="90" rx="55" ry="50" fill="#c98a4b"/>
+      <ellipse cx="100" cy="100" rx="26" ry="22" fill="#f2d9b8"/>
+      <circle cx="82" cy="78" r="6" class="plush-eye"/>
+      <circle cx="118" cy="78" r="6" class="plush-eye"/>
+      <ellipse cx="100" cy="94" rx="7" ry="5" fill="#7a4e28"/>
+      <path d="M92 104 Q100 112 108 104" stroke="#7a4e28" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="45" cy="130" rx="14" ry="22" fill="#c98a4b" transform="rotate(20 45 130)"/>
+      <ellipse cx="155" cy="130" rx="14" ry="22" fill="#c98a4b" transform="rotate(-20 155 130)"/>
+      <ellipse cx="75" cy="172" rx="16" ry="12" fill="#c98a4b"/>
+      <ellipse cx="125" cy="172" rx="16" ry="12" fill="#c98a4b"/>
+      <path class="plush-heart" d="M100 145 C90 132 68 138 68 155 C68 170 100 185 100 185 C100 185 132 170 132 155 C132 138 110 132 100 145 Z" fill="#ff4d6d"/>
+    </svg>
+  </div>
+
+  <!-- Champ de fleurs et tournesols -->
+  <div class="field" id="field"></div>
+
+  <!-- Message secret -->
+  <div class="overlay" id="overlay">
+    <div class="card">
+      <button class="close-btn" id="closeBtn">×</button>
+      <div class="card-flowers">🌻🌻</div>
+      <h2>Pour toi 💌</h2>
+      <p id="messageText" class="typed-message"></p>
+      <div class="gift">
+        <svg viewBox="0 0 120 112" width="110" height="102">
+          <defs>
+            <g id="berry">
+              <path d="M0 2 C7 1 10 8 7 15 C5 20 -5 20 -7 15 C-10 8 -7 1 0 2 Z" fill="#e2264d"/>
+              <g fill="#ffd23f" opacity="0.9">
+                <ellipse cx="-3" cy="7" rx="0.9" ry="1.4"/>
+                <ellipse cx="2" cy="6" rx="0.9" ry="1.4"/>
+                <ellipse cx="-4" cy="12" rx="0.9" ry="1.4"/>
+                <ellipse cx="1" cy="13" rx="0.9" ry="1.4"/>
+                <ellipse cx="4" cy="10" rx="0.9" ry="1.4"/>
+                <ellipse cx="-1" cy="17" rx="0.9" ry="1.4"/>
+              </g>
+              <path d="M-6 1 L0 -6 L6 1 L2 -1 L0 -4 L-2 -1 Z" fill="#3f8a3f"/>
+            </g>
+          </defs>
+
+          <!-- assiette -->
+          <ellipse cx="60" cy="100" rx="54" ry="8" fill="#f2f2f2"/>
+
+          <!-- part de tiramisu à la fraise -->
+          <rect x="18" y="64" width="84" height="24" rx="4" fill="#e9b9b4"/>
+          <rect x="18" y="64" width="84" height="6" fill="#d98f95"/>
+          <rect x="18" y="46" width="84" height="20" rx="3" fill="#e2264d" opacity="0.85"/>
+          <rect x="18" y="24" width="84" height="24" rx="4" fill="#fff7f3"/>
+          <path d="M26 32 Q34 26 42 32 T58 32 T74 32 T90 32" stroke="#e2264d" stroke-width="2" fill="none" opacity="0.7"/>
+          <path d="M26 39 Q34 34 42 39 T58 39 T74 39 T90 39" stroke="#e2264d" stroke-width="1.6" fill="none" opacity="0.5"/>
+
+          <!-- fraises entières sur le dessus -->
+          <use href="#berry" transform="translate(38,10)"/>
+          <use href="#berry" transform="translate(60,6) scale(1.1)"/>
+          <use href="#berry" transform="translate(82,10)"/>
+
+          <!-- fraise coupée en tranche, bien visible -->
+          <g transform="translate(16,96)">
+            <circle r="9" fill="#f7c9cd"/>
+            <circle r="9" fill="none" stroke="#e2264d" stroke-width="1.5"/>
+            <circle r="2.6" fill="#fdeef0"/>
+            <g fill="#ffd23f">
+              <circle cx="6" cy="0" r="0.9"/><circle cx="4.2" cy="4.2" r="0.9"/><circle cx="0" cy="6" r="0.9"/>
+              <circle cx="-4.2" cy="4.2" r="0.9"/><circle cx="-6" cy="0" r="0.9"/><circle cx="-4.2" cy="-4.2" r="0.9"/>
+              <circle cx="0" cy="-6" r="0.9"/><circle cx="4.2" cy="-4.2" r="0.9"/>
+            </g>
+          </g>
+        </svg>
+        <p class="gift-label">ton cadeau : un tiramisu à la fraise 🍓</p>
+      </div>
+      <div class="card-plush">🧸</div>
+    </div>
+  </div>
+
+  <div class="confetti-layer" id="confettiLayer"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

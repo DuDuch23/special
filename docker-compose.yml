@@ -1,0 +1,7 @@
+services:
+  speciale:
+    build: .
+    container_name: speciale
+    restart: unless-stopped
+    ports:
+      - "8091:80"
