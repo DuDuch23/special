@@ -29,7 +29,7 @@ function spawnHearts() {
 // ---------- Champ de tournesols et fleurs ----------
 function spawnField() {
   const field = document.getElementById('field');
-  const kinds = ['🌻', '🌻', '🌸', '🌼', '🌷', '🌻'];
+  const kinds = ['🌻', '🌻', '🌻'];
   const total = window.innerWidth < 600 ? 12 : 22;
   for (let i = 0; i < total; i++) {
     const el = document.createElement('span');
