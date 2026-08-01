@@ -2,11 +2,9 @@
 // Modifie le texte ci-dessous pour personnaliser la surprise.
 const MESSAGE = `Joyeuse fête 💖
 
-Les tournesols tournent toujours vers leur soleil, Cubana 🌻☀️
-Une peluche à câliner, et un petit tiramisu à la fraise en cadeau bien commencer la journée en douceur (je le crée vu que je n'arrive pas à en trouver) 🍓
-
+Les tournesols tournent toujours vers leur soleil, Cubanaa 🌻☀️
+Une peluche à câliner (tu peux jouer avec), et un petit tiramisu à la fraise en cadeau pour bien commencer la journée en douceur (je le crée vu que je n'ai pas de chance pour en trouver) 🍓
 En espérant que ça te fasse plaisir
-
 Bisous
 `;
 
