@@ -9,17 +9,13 @@ Le site est volontairement exclu des moteurs de recherche via :
 - une balise `<meta name="robots" content="noindex, nofollow, noarchive">` dans `index.html`
 - un header HTTP `X-Robots-Tag` renvoyé par nginx pour toutes les pages
 
-⚠️ Le `robots.txt` du conteneur (`/speciale/robots.txt`) n'est **pas** celui que Google regarde :
-les crawlers vérifient `https://alexandre-duchemin.fr/robots.txt` (la racine du domaine), qui est
-géré par ton site principal, pas par ce conteneur. Si tu veux une protection complète, ajoute cette
-ligne dans le `robots.txt` racine de `alexandre-duchemin.fr` :
+Ces deux protections sont **au niveau du conteneur** : elles s'appliquent quelle que soit l'URL
+utilisée pour y accéder (tunnel Cloudflare, IP, ou sous-dossier d'un domaine). Rien d'autre à
+configurer si tu utilises le lien du tunnel Cloudflare ci-dessous — il n'est de toute façon jamais
+lié à un domaine indexable.
 
-```
-Disallow: /speciale
-```
-
-La balise meta + le header restent la protection principale et suffisent dans la plupart des cas
-(ils empêchent l'indexation même si la page est crawlée).
+Si tu déploies plutôt sous `alexandre-duchemin.fr/speciale` (voir plus bas), ajoute en plus
+`Disallow: /speciale` au `robots.txt` racine de ton portfolio, par sécurité.
 
 ## Personnaliser le message
 
@@ -35,13 +31,61 @@ npx serve .
 
 ## Tester en local avec Docker
 
+Par défaut le conteneur n'expose **aucun port** sur l'hôte (voir section Sécurité plus bas).
+Pour tester en local, ouvre `docker-compose.yml` et décommente les deux lignes `ports:` /
+`- "127.0.0.1:8091:8080"` du service `speciale`, puis :
+
 ```bash
 docker compose up --build
 ```
 
 Puis ouvre http://localhost:8091
 
-## Déployer sur le VPS à `alexandre-duchemin.fr/speciale`
+## Sécurité
+
+Le conteneur `speciale` n'est volontairement **pas exposé publiquement** :
+- pas de `ports:` par défaut dans `docker-compose.yml` — seul `cloudflared` peut l'atteindre,
+  via le réseau interne Docker (`http://speciale:8080`). Sans ça, n'importe qui scannant les
+  ports du VPS serait tombé directement sur le site, en contournant le côté "lien secret" du tunnel.
+- image nginx **non-root** (`nginxinc/nginx-unprivileged`), aucun besoin de privilèges pour
+  démarrer
+- `read_only: true` + `cap_drop: [ALL]` + `no-new-privileges` sur les deux services
+- headers de sécurité HTTP dans `nginx.conf` : CSP stricte (`default-src 'self'`, aucune
+  ressource externe autorisée), `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`,
+  `Strict-Transport-Security`
+- fichiers commençant par un point (`.env`, `.git`, ...) bloqués explicitement
+
+Si le conteneur `cloudflared` refuse de démarrer à cause de `read_only: true` (selon la version
+de l'image), retire simplement `read_only: true` et `tmpfs: [/tmp]` de ce service — ça n'a aucun
+impact sur la sécurité du site lui-même, qui reste isolé côté `speciale`.
+
+## Déployer sur le VPS avec un lien indépendant de ton domaine (recommandé)
+
+`docker-compose.yml` inclut un service `cloudflared` qui ouvre un tunnel Cloudflare gratuit
+vers le conteneur. Il génère une URL aléatoire en `https://xxxxx.trycloudflare.com`, sans
+toucher à `alexandre-duchemin.fr` ni à ton DNS.
+
+1. Sur le VPS :
+
+   ```bash
+   cd /data/speciale
+   docker compose up -d --build
+   ```
+
+2. Récupère l'URL générée dans les logs du tunnel :
+
+   ```bash
+   docker compose logs cloudflared | grep trycloudflare.com
+   ```
+
+   Tu verras une ligne du type `https://mot-aleatoire-ici.trycloudflare.com` — c'est le lien à
+   partager.
+
+3. Le tunnel reste actif tant que le conteneur tourne (`restart: unless-stopped`), mais l'URL
+   **change à chaque redémarrage** du conteneur `cloudflared`. Évite donc de le relancer une fois
+   le lien partagé.
+
+## Alternative : déployer sous `alexandre-duchemin.fr/speciale`
 
 1. Copie tout le dossier sur le VPS (ex : `/opt/speciale`).
 2. Lance le conteneur :
@@ -51,7 +95,9 @@ Puis ouvre http://localhost:8091
    docker compose up -d --build
    ```
 
-   Le site tourne alors sur `127.0.0.1:8091` dans le conteneur.
+   Décommente d'abord les lignes `ports:` / `- "127.0.0.1:8091:8080"` dans `docker-compose.yml`
+   (nécessaires ici puisque le reverse proxy doit atteindre le conteneur depuis l'hôte).
+   Le site tourne alors sur `127.0.0.1:8091`.
 
 3. Configure ton reverse proxy existant pour rediriger `/speciale` vers ce port.
    Le site utilise des chemins **relatifs** (`css/style.css`, `js/script.js`), donc il

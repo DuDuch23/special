@@ -3,5 +3,29 @@ services:
     build: .
     container_name: speciale
     restart: unless-stopped
-    ports:
-      - "8091:80"
+    # ports:
+    #   - "127.0.0.1:8091:8080"   # décommente uniquement pour tester en local sur le VPS
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: speciale-tunnel
+    command: tunnel --url http://speciale:8080
+    depends_on:
+      - speciale
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
